@@ -6,7 +6,7 @@
 /*   By: zyasuo <zyasuo@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 21:02:24 by zyasuo            #+#    #+#             */
-/*   Updated: 2022/06/24 20:03:21 by zyasuo           ###   ########.fr       */
+/*   Updated: 2022/06/25 20:31:53 by zyasuo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,4 +39,15 @@ char	*remove_spaces(char *str)
 	new_string = ft_strdup(str);
 	free(str);
 	return (new_string);
+}
+
+void	remove_endl(char *str)
+{
+	int	strlen;
+
+	if (!str)
+		return ;
+	strlen = ft_strlen(str);
+	if (str[strlen - 1] == '\n')
+		ft_memmove(&str[strlen - 1], &str[strlen], 1);
 }

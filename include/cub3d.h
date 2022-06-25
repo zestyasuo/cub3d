@@ -6,7 +6,7 @@
 /*   By: zyasuo <zyasuo@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 23:44:01 by zyasuo            #+#    #+#             */
-/*   Updated: 2022/06/24 16:42:39 by zyasuo           ###   ########.fr       */
+/*   Updated: 2022/06/25 20:45:07 by zyasuo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,4 +29,5 @@ int		print_error(char *error);
 char	**get_file(char *path);
 char	*remove_spaces(char *str);
 void	format_file(char **file_array);
+void	remove_endl(char *str);
 #endif

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   file_get.c                                         :+:      :+:    :+:   */
+/*   get_file.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zyasuo <zyasuo@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 16:30:47 by zyasuo            #+#    #+#             */
-/*   Updated: 2022/06/22 18:25:49 by zyasuo           ###   ########.fr       */
+/*   Updated: 2022/06/25 18:12:57 by zyasuo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,9 +67,12 @@ char	**file_get_array(char *path, int height)
 char	**get_file(char *path)
 {
 	int	height;
+	char	**file_array;
 
 	height = file_get_height(path);
 	if (height < 1)
 		return (NULL);
-	return (file_get_array(path, height));
+	file_array = file_get_array(path, height);
+	format_file(file_array);
+	return (file_array);
 }

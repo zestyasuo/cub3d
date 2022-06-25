@@ -6,14 +6,24 @@
 /*   By: zyasuo <zyasuo@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 18:32:42 by zyasuo            #+#    #+#             */
-/*   Updated: 2022/06/25 16:51:56 by zyasuo           ###   ########.fr       */
+/*   Updated: 2022/06/25 20:49:53 by zyasuo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/map.h"
 #include "../include/cub3d.h"
 
-static int	is_id_valid(char *id)
+t_texture	**new_textures(int size)
+{
+	t_texture	**new;
+
+	new = ft_calloc(size, sizeof(*new));
+	if (!new)
+		return (NULL);
+	return (new);
+}
+
+int	is_id_valid(char *id)
 {
 	return (!ft_strcmp(id, "NO") || !ft_strcmp(id, "SO")
 		|| !ft_strcmp(id, "WE") || !ft_strcmp(id, "EA")
@@ -22,64 +32,49 @@ static int	is_id_valid(char *id)
 
 t_texture	*get_texture_from_str(char *file_str)
 {
-	int			i;
-	char		**split_str;
+	char	**split_str;
 	t_texture	*texture;
 
-	i = 0;
-	split_str = ft_split(file_str, ' ');
-	if (ft_array_size(split_str) != 2)
-		return (NULL);
-	if (!is_id_valid(split_str[0]))
-		return (NULL);
 	texture = malloc(sizeof(*texture));
 	if (!texture)
 		return (NULL);
+	split_str = ft_split(file_str, ' ');
+	if (ft_array_size(split_str) != 2)
+	{
+		array_clear(split_str);
+		return (NULL);
+	}
+	remove_endl(split_str[0]);
+	remove_endl(split_str[1]);
 	texture->id = split_str[0];
 	texture->path = split_str[1];
-	return (texture);
-}
-
-int	has_texture_id(t_texture **textures, char *id)
-{
-	int	i;
-
-	i = 0;
-	while (textures[i]->id)
-	{
-		if (!ft_strcmp(textures[i]->id, id))
-			return (1);
-		i++;
-	}
-	return (0);
+	free(split_str);
+	if (is_id_valid(texture->id))
+		return (texture);
+	return (NULL);
 }
 
 t_texture	**get_textures(char **file_array)
 {
 	t_texture	**textures;
+	int			map_id;
 	int			i;
-	int			map_str_id;
 	int			j;
-	t_texture	*temp;
+	t_texture	*tmp;
 
-	map_str_id = find_map_in_file(file_array);
-	textures = malloc(sizeof (*textures) * 7);
-	if (!textures)
-		return (NULL);
-	textures[6] = NULL;
+	map_id = find_map_in_file(file_array);
+	textures = new_textures(map_id + 1);
 	i = 0;
 	j = 0;
-	while (i <= map_str_id)
+	while(i < map_id)
 	{
-		temp = get_texture_from_str(file_array[i]);
-		if (!temp)
-			i++;
+		tmp = get_texture_from_str(file_array[i]);
+		if (tmp)
+			textures[j++] = tmp;
 		else
-		{
-			if (!has_texture_id(textures, temp->id))
-				textures[j++] = temp;
-			i++;
-		}
+			free(tmp);
+		i++;
 	}
+	textures[j] = NULL;
 	return (textures);
 }

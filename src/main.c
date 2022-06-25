@@ -6,12 +6,17 @@
 /*   By: zyasuo <zyasuo@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 23:47:02 by zyasuo            #+#    #+#             */
-/*   Updated: 2022/06/25 16:45:44 by zyasuo           ###   ########.fr       */
+/*   Updated: 2022/06/25 20:20:18 by zyasuo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
 #include <game.h>
+
+void	print_texture(t_texture *texture)
+{
+	printf("id: %s, path %s\n", texture->id, texture->path);
+}
 
 int	main(int argc, char **argv)
 {
@@ -26,14 +31,18 @@ int	main(int argc, char **argv)
 	file = get_file(map_path);
 	if (!file)
 		exit(0);
-	format_file(file);
 	i = 0;
 	while (file[i])
-	{
-		printf("%s", file[i]);
-		i++;
-	}
+		printf("%s", file[i++]);
 	game = game_init(800, 600);
 	game->map->textures = get_textures(file);
+	i = 0;
+	while (game->map->textures[i])
+	{
+		printf("%d - ", i);
+		print_texture(game->map->textures[i]);
+		i++;
+	}
+	// game->map->textures = get_textures(file);
 	mlx_loop(game->window.mlx);
 }
