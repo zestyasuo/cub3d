@@ -10,6 +10,7 @@ SRC	=		main.c					\
 			get_file.c				\
 			string_utils.c			\
 			format_file.c			\
+			get_textures.c			\
 
 
 

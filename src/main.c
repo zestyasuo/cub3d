@@ -6,7 +6,7 @@
 /*   By: zyasuo <zyasuo@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 23:47:02 by zyasuo            #+#    #+#             */
-/*   Updated: 2022/06/24 20:15:32 by zyasuo           ###   ########.fr       */
+/*   Updated: 2022/06/25 16:45:44 by zyasuo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,10 @@
 
 int	main(int argc, char **argv)
 {
-	// t_game	*game;
+	t_game	*game;
 	char	*map_path;
 	char	**file;
-	int	i;
+	int		i;
 
 	if (argc != 2)
 		return (0 * print_error("Error.\n"));
@@ -33,7 +33,7 @@ int	main(int argc, char **argv)
 		printf("%s", file[i]);
 		i++;
 	}
-	
-	// game = game_init(800, 600);
-	// mlx_loop(game->window.mlx);
+	game = game_init(800, 600);
+	game->map->textures = get_textures(file);
+	mlx_loop(game->window.mlx);
 }
