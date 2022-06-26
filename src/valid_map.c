@@ -1,27 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   game.h                                             :+:      :+:    :+:   */
+/*   valid_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zyasuo <zyasuo@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/21 16:26:25 by zyasuo            #+#    #+#             */
-/*   Updated: 2022/06/27 01:45:56 by zyasuo           ###   ########.fr       */
+/*   Created: 2022/06/26 19:02:22 by zyasuo            #+#    #+#             */
+/*   Updated: 2022/06/26 22:00:21 by zyasuo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GAME_H
-# define GAME_H
-# include "./cub3d.h"
-# include "./map.h"
+#include "../include/map.h"
 
-typedef struct s_game
+int	is_map_valid(char **file_array)
 {
-	t_window	window;
-	t_map		*map;
-}	t_game;
+	int	map_id;
+	int	i;
 
-t_game	*game_init(int length, int height, char *map_path);
-int		valid_file(char **file_array);
-void	clear_game(t_game *game);
-#endif
+	map_id = find_map_in_file(file_array);
+	i = map_id;
+	while (file_array[i])
+	{
+		if (!is_map_str(file_array[i]))
+			return (0);
+		i++;
+	}
+	return (1);
+}

@@ -6,7 +6,7 @@
 /*   By: zyasuo <zyasuo@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 23:12:41 by zyasuo            #+#    #+#             */
-/*   Updated: 2022/06/25 18:51:29 by zyasuo           ###   ########.fr       */
+/*   Updated: 2022/06/26 18:43:47 by zyasuo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,8 @@ void	format_file(char **file_array)
 	int	map_first_line;
 	int	i;
 
+	if (!file_array)
+		return ;
 	map_first_line = find_map_in_file(file_array);
 	if (map_first_line < 0)
 		return ;

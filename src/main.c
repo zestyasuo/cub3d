@@ -6,43 +6,39 @@
 /*   By: zyasuo <zyasuo@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 23:47:02 by zyasuo            #+#    #+#             */
-/*   Updated: 2022/06/25 20:20:18 by zyasuo           ###   ########.fr       */
+/*   Updated: 2022/06/27 01:51:39 by zyasuo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/cub3d.h"
 #include <game.h>
 
-void	print_texture(t_texture *texture)
+int	destroy_window(t_game *game)
 {
-	printf("id: %s, path %s\n", texture->id, texture->path);
+	mlx_destroy_window(game->window.mlx, game->window.mlx_win);
+	clear_game(game);
+	exit(0);
 }
 
 int	main(int argc, char **argv)
 {
 	t_game	*game;
 	char	*map_path;
-	char	**file;
 	int		i;
 
 	if (argc != 2)
 		return (0 * print_error("Error.\n"));
 	map_path = argv[1];
-	file = get_file(map_path);
-	if (!file)
-		exit(0);
+	game = game_init(800, 600, map_path);
+	if (!game)
+		return (0 * print_error("Error. Check your config file.\n"));
 	i = 0;
-	while (file[i])
-		printf("%s", file[i++]);
-	game = game_init(800, 600);
-	game->map->textures = get_textures(file);
-	i = 0;
-	while (game->map->textures[i])
-	{
-		printf("%d - ", i);
-		print_texture(game->map->textures[i]);
-		i++;
-	}
-	// game->map->textures = get_textures(file);
+	// while (game->map->textures[i])
+	// {
+	// 	printf("%d - ", i);
+	// 	print_texture(game->map->textures[i]);
+	// 	i++;
+	// }
+	mlx_hook(game->window.mlx_win, 17, 0, destroy_window, game);
 	mlx_loop(game->window.mlx);
 }

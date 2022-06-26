@@ -6,7 +6,7 @@
 /*   By: zyasuo <zyasuo@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 16:30:47 by zyasuo            #+#    #+#             */
-/*   Updated: 2022/06/25 18:12:57 by zyasuo           ###   ########.fr       */
+/*   Updated: 2022/06/26 18:43:37 by zyasuo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,13 +66,15 @@ char	**file_get_array(char *path, int height)
 
 char	**get_file(char *path)
 {
-	int	height;
+	int		height;
 	char	**file_array;
 
 	height = file_get_height(path);
 	if (height < 1)
 		return (NULL);
 	file_array = file_get_array(path, height);
+	if (!file_array)
+		return (NULL);
 	format_file(file_array);
 	return (file_array);
 }

@@ -103,7 +103,7 @@ char	*get_next_line(int fd, int BUFFER_SIZE)
 			return (res);
 	}
 	endline = ft_char_index(buf, '\n') + 1;
-	res = cat_res(res, buf, ft_len(res) + 1 + endline);
+	res = cat_res(res, buf, ft_len(res) + endline);
 	buf = trim_buf(buf, endline);
 	if (!ft_len(buf))
 	{

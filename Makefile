@@ -1,6 +1,6 @@
 NAME	=	cub3d
 CC		=	clang
-CFLAGS	=	-Wall -Wextra -Werror #-fsanitize=address
+CFLAGS	=	-Wall -Wextra -Werror -fsanitize=address
 
 SRC	=		main.c					\
 			game.c					\
@@ -11,7 +11,9 @@ SRC	=		main.c					\
 			string_utils.c			\
 			format_file.c			\
 			get_textures.c			\
-
+			clear_game.c			\
+			valid_textures.c		\
+			
 
 
 OBJDIR	=	obj
