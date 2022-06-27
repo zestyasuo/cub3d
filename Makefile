@@ -13,6 +13,8 @@ SRC	=		main.c					\
 			get_textures.c			\
 			clear_game.c			\
 			valid_textures.c		\
+			get_map_matrix.c		\
+			valid_map.c				\
 			
 
 

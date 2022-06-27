@@ -6,7 +6,7 @@
 /*   By: zyasuo <zyasuo@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/26 18:31:30 by zyasuo            #+#    #+#             */
-/*   Updated: 2022/06/27 01:52:32 by zyasuo           ###   ########.fr       */
+/*   Updated: 2022/06/27 13:14:23 by zyasuo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	clear_texture(void *pointer)
 
 void	clear_map(t_map *map)
 {
-	// array_clear(map->map_matrix);
+	array_clear(map->map_matrix);
 	ft_lstclear(&map->textures, clear_texture);
 	free(map);
 }

@@ -6,7 +6,7 @@
 /*   By: zyasuo <zyasuo@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/23 23:12:41 by zyasuo            #+#    #+#             */
-/*   Updated: 2022/06/26 18:43:47 by zyasuo           ###   ########.fr       */
+/*   Updated: 2022/06/27 17:54:45 by zyasuo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,5 +63,4 @@ void	format_file(char **file_array)
 	i = -1;
 	while (++i < map_first_line)
 		file_array[i] = remove_spaces(file_array[i]);
-	ft_printf("Map line: %d\n", map_first_line);
 }

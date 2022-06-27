@@ -6,7 +6,7 @@
 /*   By: zyasuo <zyasuo@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 16:30:37 by zyasuo            #+#    #+#             */
-/*   Updated: 2022/06/27 01:11:44 by zyasuo           ###   ########.fr       */
+/*   Updated: 2022/06/27 13:51:50 by zyasuo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,9 @@ int			find_map_in_file(char **file_array);
 int			is_id_valid(char *id);
 int			is_map_str(char *str);
 int			is_textures_valid(t_list *textures);
+int			is_map_valid(char **map_matrix);
 void		clear_texture(void *pointer);
+char		**get_map_matrix(char **file_array);
 t_texture	*get_texture_from_str(char *file_str);
 t_list		*get_textures(char **file_array);
 #endif

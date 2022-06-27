@@ -24,7 +24,6 @@ static int	has_dup(t_list *textures)
 		current2 = current->next;
 		while (current2)
 		{
-			printf("COMPARING %s and %s\n", ((t_texture *)current->content)->id, ((t_texture *)current2->content)->id);
 			if (!ft_strcmp(((t_texture *)current->content)->id,
 					((t_texture *)current2->content)->id))
 				return (1);
