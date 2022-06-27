@@ -6,7 +6,7 @@
 /*   By: zyasuo <zyasuo@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 23:55:56 by zyasuo            #+#    #+#             */
-/*   Updated: 2022/06/27 18:35:37 by zyasuo           ###   ########.fr       */
+/*   Updated: 2022/06/28 01:17:20 by zyasuo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,12 +42,12 @@ t_map	*new_map(char *map_path)
 	new->map_matrix = get_map_matrix(file);
 	if (!is_textures_valid(new->textures) || !is_map_valid(new->map_matrix))
 	{
-		ft_lstclear(&new->textures, clear_texture);
-		array_clear(new->map_matrix);
-		free(new);
+		clear_map(new);
 		array_clear(file);
 		return (NULL);
 	}
+	new->length = get_max_map_length(new->map_matrix);
+	new->height = get_map_height(new->map_matrix);
 	array_clear(file);
 	return (new);
 }

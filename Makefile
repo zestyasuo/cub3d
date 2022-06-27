@@ -16,6 +16,8 @@ SRC	=		main.c					\
 			get_map_matrix.c		\
 			valid_map.c				\
 			valid_file.c			\
+			render_minimap.c		\
+			mlx_utils.c				\
 			
 
 
@@ -23,7 +25,11 @@ OBJDIR	=	obj
 SRCDIR	=	src
 INCDIR	=	include
 
-HEADERS	=	cub3d.h
+HEADERS	=	cub3d.h			\
+			game.h			\
+			map.h			\
+			get_next_line.h	\
+
 FT_PRINTF 	=	ft_printf/libftprintf.a 
 FT_PRINTF_PATH	=	./ft_printf/include
 
