@@ -6,7 +6,7 @@
 /*   By: zyasuo <zyasuo@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 16:30:37 by zyasuo            #+#    #+#             */
-/*   Updated: 2022/06/27 13:51:50 by zyasuo           ###   ########.fr       */
+/*   Updated: 2022/06/27 18:27:26 by zyasuo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ int			is_id_valid(char *id);
 int			is_map_str(char *str);
 int			is_textures_valid(t_list *textures);
 int			is_map_valid(char **map_matrix);
+int			is_path_valid(char *path);
 void		clear_texture(void *pointer);
 char		**get_map_matrix(char **file_array);
 t_texture	*get_texture_from_str(char *file_str);

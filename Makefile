@@ -15,6 +15,7 @@ SRC	=		main.c					\
 			valid_textures.c		\
 			get_map_matrix.c		\
 			valid_map.c				\
+			valid_file.c			\
 			
 
 

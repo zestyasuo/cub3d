@@ -6,7 +6,7 @@
 /*   By: zyasuo <zyasuo@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 23:55:56 by zyasuo            #+#    #+#             */
-/*   Updated: 2022/06/27 17:54:13 by zyasuo           ###   ########.fr       */
+/*   Updated: 2022/06/27 18:35:37 by zyasuo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,10 @@ t_map	*new_map(char *map_path)
 		return (NULL);
 	file = get_file(map_path);
 	if (!file)
+	{
+		free (new);
 		return (NULL);
+	}
 	new->textures = get_textures(file);
 	new->map_matrix = get_map_matrix(file);
 	if (!is_textures_valid(new->textures) || !is_map_valid(new->map_matrix))

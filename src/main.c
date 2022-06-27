@@ -6,7 +6,7 @@
 /*   By: zyasuo <zyasuo@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 23:47:02 by zyasuo            #+#    #+#             */
-/*   Updated: 2022/06/27 17:36:04 by zyasuo           ###   ########.fr       */
+/*   Updated: 2022/06/27 18:36:22 by zyasuo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,10 @@ int	main(int argc, char **argv)
 	char	*map_path;
 
 	if (argc != 2)
-		return (0 * print_error("Error.\n"));
+		return (1 * print_error("Error. Usage: ./cub3d file.cub\n"));
 	map_path = argv[1];
+	if (!is_path_valid(map_path))
+		return (1 * print_error("Invalid file extension.\n"));
 	game = game_init(800, 600, map_path);
 	if (!game)
 		return (0 * print_error("Error. Check your config file.\n"));
