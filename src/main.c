@@ -6,7 +6,7 @@
 /*   By: zyasuo <zyasuo@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 23:47:02 by zyasuo            #+#    #+#             */
-/*   Updated: 2022/06/28 01:21:54 by zyasuo           ###   ########.fr       */
+/*   Updated: 2022/06/28 19:25:25 by zyasuo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,14 @@ int	destroy_window(t_game *game)
 	mlx_destroy_window(game->window.mlx, game->window.mlx_win);
 	clear_game(game);
 	exit(0);
+}
+
+int	key_hook(int key, t_game *game)
+{
+	if (key == ESCAPE)
+		destroy_window(game);
+	player_controller(game, key);
+	return (0);
 }
 
 int	main(int argc, char **argv)
@@ -34,6 +42,8 @@ int	main(int argc, char **argv)
 	if (!game)
 		return (0 * print_error("Error. Check your config file.\n"));
 	render_minimap(game);
+	render_player(game);
+	mlx_key_hook(game->window.mlx_win, key_hook, game);
 	mlx_hook(game->window.mlx_win, 17, 0, destroy_window, game);
 	mlx_loop(game->window.mlx);
 }

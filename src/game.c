@@ -6,7 +6,7 @@
 /*   By: zyasuo <zyasuo@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 23:55:56 by zyasuo            #+#    #+#             */
-/*   Updated: 2022/06/28 01:17:20 by zyasuo           ###   ########.fr       */
+/*   Updated: 2022/06/28 18:54:15 by zyasuo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ t_game	*game_init(int length, int height, char *map_path)
 		free(game);
 		return (NULL);
 	}
+	game->player = new_player(game->map);
 	game->window.mlx = mlx_init();
 	game->window.mlx_win = mlx_new_window(game->window.mlx,
 			length, height, "cub3d");

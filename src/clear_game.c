@@ -6,7 +6,7 @@
 /*   By: zyasuo <zyasuo@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/26 18:31:30 by zyasuo            #+#    #+#             */
-/*   Updated: 2022/06/27 18:38:17 by zyasuo           ###   ########.fr       */
+/*   Updated: 2022/06/28 19:06:16 by zyasuo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,11 +37,19 @@ void	clear_window(t_window window)
 	window.mlx = NULL;
 }
 
+void	clear_player(t_player *player)
+{
+	if (!player)
+		return ;
+	free(player->pos);
+	free(player);
+}
+
 void	clear_game(t_game *game)
 {
 	if (!game)
 		return ;
 	clear_map(game->map);
+	clear_player(game->player);
 	free(game);
-	game = NULL;
 }
