@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zyasuo <zyasuo@student.21-school.ru>       +#+  +:+       +#+        */
+/*   By: mnathali <mnathali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 23:47:02 by zyasuo            #+#    #+#             */
-/*   Updated: 2022/06/28 19:25:25 by zyasuo           ###   ########.fr       */
+/*   Updated: 2022/06/28 23:17:35 by mnathali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,14 @@ int	key_hook(int key, t_game *game)
 	return (0);
 }
 
+int	expose_hook(t_game *game)
+{
+	mlx_clear_window(game->window.mlx, game->window.mlx_win);
+	render_minimap(game);
+	render_player(game);
+	return (0);
+}
+
 int	main(int argc, char **argv)
 {
 	t_game	*game;
@@ -41,9 +49,8 @@ int	main(int argc, char **argv)
 	game = game_init(800, 600, map_path);
 	if (!game)
 		return (0 * print_error("Error. Check your config file.\n"));
-	render_minimap(game);
-	render_player(game);
 	mlx_key_hook(game->window.mlx_win, key_hook, game);
 	mlx_hook(game->window.mlx_win, 17, 0, destroy_window, game);
+	mlx_expose_hook(game->window.mlx_win, &expose_hook, game);
 	mlx_loop(game->window.mlx);
 }
