@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   clear_game.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zyasuo <zyasuo@student.21-school.ru>       +#+  +:+       +#+        */
+/*   By: mnathali <mnathali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/26 18:31:30 by zyasuo            #+#    #+#             */
-/*   Updated: 2022/06/28 19:06:16 by zyasuo           ###   ########.fr       */
+/*   Updated: 2022/06/29 19:41:48 by mnathali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ void	clear_player(t_player *player)
 	if (!player)
 		return ;
 	free(player->pos);
+	free(player->view);
 	free(player);
 }
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render_minimap.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zyasuo <zyasuo@student.21-school.ru>       +#+  +:+       +#+        */
+/*   By: mnathali <mnathali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/27 19:59:04 by zyasuo            #+#    #+#             */
-/*   Updated: 2022/06/28 20:12:22 by zyasuo           ###   ########.fr       */
+/*   Updated: 2022/06/29 19:34:39 by mnathali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,16 +44,17 @@ void	render_player(t_game *game)
 	mlx_destroy_image(game->window.mlx, img.img);
 }
 
-void	render_minimap(t_game *game)
+t_data	*render_minimap(t_game *game)
 {
-	t_data	img;
+	t_data	*img;
 	int		i;
 	int		j;
 
-	img.img = mlx_new_image(game->window.mlx, game->map->length * TILE,
+	img = malloc(sizeof(t_data));
+	img->img = mlx_new_image(game->window.mlx, game->map->length * TILE,
 			game->map->height * TILE);
-	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length,
-			&img.endian);
+	img->addr = mlx_get_data_addr(img->img, &img->bits_per_pixel, &img->line_length,
+			&img->endian);
 	i = 0;
 	while (i < game->map->height)
 	{
@@ -61,12 +62,13 @@ void	render_minimap(t_game *game)
 		while (j < game->map->length)
 		{
 			render_tile(j * TILE, i * TILE,
-				get_color(game->map->map_matrix[i][j]), img);
+				get_color(game->map->map_matrix[i][j]), *img);
 			j++;
 		}
 		i++;
 	}
 	mlx_put_image_to_window(game->window.mlx, game->window.mlx_win,
-		img.img, 0, 0);
-	mlx_destroy_image(game->window.mlx, img.img);
+		img->img, 0, 0);
+	return (img);
+	//mlx_destroy_image(game->window.mlx, img.img);
 }

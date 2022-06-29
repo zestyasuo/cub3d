@@ -20,6 +20,7 @@ SRC	=		main.c					\
 			mlx_utils.c				\
 			player_controller.c		\
 			new_player.c			\
+			rays.c
 
 
 OBJDIR	=	obj

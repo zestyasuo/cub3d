@@ -6,7 +6,7 @@
 /*   By: mnathali <mnathali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 23:47:02 by zyasuo            #+#    #+#             */
-/*   Updated: 2022/06/28 23:17:35 by mnathali         ###   ########.fr       */
+/*   Updated: 2022/06/30 01:25:39 by mnathali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,26 @@ int	key_hook(int key, t_game *game)
 	return (0);
 }
 
+int	mouse_hook(int button, int x, int y, t_game *game)
+{
+	(void)x;
+	(void)y;
+	player_controller(game, -button);
+	return (0);
+}
+
 int	expose_hook(t_game *game)
 {
+	t_data	*img;
+	
 	mlx_clear_window(game->window.mlx, game->window.mlx_win);
-	render_minimap(game);
+	img = render_minimap(game);
 	render_player(game);
+	draw_ray(game, img, game->player->view->angle);
+	draw_ray(game, img, game->player->view->angle + game->player->view->fov / 2);
+	draw_ray(game, img, game->player->view->angle - game->player->view->fov / 2);
+	mlx_destroy_image(game->window.mlx, img->img);
+	free(img);
 	return (0);
 }
 
@@ -46,11 +61,12 @@ int	main(int argc, char **argv)
 	map_path = argv[1];
 	if (!is_path_valid(map_path))
 		return (1 * print_error("Invalid file extension.\n"));
-	game = game_init(800, 600, map_path);
+	game = game_init(WIGHT, HEIGHT, map_path);
 	if (!game)
 		return (0 * print_error("Error. Check your config file.\n"));
 	mlx_key_hook(game->window.mlx_win, key_hook, game);
+	mlx_mouse_hook(game->window.mlx_win, mouse_hook, game);
 	mlx_hook(game->window.mlx_win, 17, 0, destroy_window, game);
-	mlx_expose_hook(game->window.mlx_win, &expose_hook, game);
+	mlx_expose_hook(game->window.mlx_win, expose_hook, game);
 	mlx_loop(game->window.mlx);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zyasuo <zyasuo@student.21-school.ru>       +#+  +:+       +#+        */
+/*   By: mnathali <mnathali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 23:44:01 by zyasuo            #+#    #+#             */
-/*   Updated: 2022/06/25 20:45:07 by zyasuo           ###   ########.fr       */
+/*   Updated: 2022/06/29 17:01:53 by mnathali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@
 # include <unistd.h>
 # include "../ft_printf/include/ft_printf.h"
 # include "./get_next_line.h"
+# define WIGHT 800
+# define HEIGHT 600
 
 typedef struct s_window {
 	void	*mlx;
