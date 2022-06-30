@@ -6,29 +6,41 @@
 /*   By: zyasuo <zyasuo@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/28 19:11:41 by zyasuo            #+#    #+#             */
-/*   Updated: 2022/06/30 16:26:24 by zyasuo           ###   ########.fr       */
+/*   Updated: 2022/07/01 01:27:15 by zyasuo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/game.h"
 #define STEP 0.5
 
-int	is_wall(int x, int y, char **map)
+int	is_wall(float x, float y, char **map)
 {
-	if (map[y][x] == '1')
+	int	ceil_x;
+	int	ceil_y;
+	int	floor_x;
+	int	floor_y;
+
+	ceil_x = ceilf(x);
+	ceil_y = ceilf(y);
+	floor_x = floorf(x);
+	floor_y = floorf(y);
+	if (map[ceil_y][ceil_x] == '1' || map[floor_y][floor_x] == '1')
 		return (1);
 	return (0);
+}
+
+int	check_walls(t_pos *pos, float x, float y, char **map)
+{
+	return (
+		is_wall(pos->x + x, pos->y + y, map)
+	);
 }
 
 void	move_player(t_game *game, float y, float x)
 {
 	t_data	*img;
 
-	if (is_wall((int)(game->player->pos->x + x),
-		(int)(game->player->pos->y + y), game->map->map_matrix)
-		|| is_wall((int)(game->player->pos->x + (1 - STEP) + x),
-			(int)(game->player->pos->y + (1 - STEP) + y),
-				game->map->map_matrix))
+	if (check_walls(game->player->pos, x, y, game->map->map_matrix))
 		return ;
 	game->player->pos->x += x;
 	game->player->pos->y += y;

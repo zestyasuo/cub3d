@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mnathali <mnathali@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zyasuo <zyasuo@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 16:26:25 by zyasuo            #+#    #+#             */
-/*   Updated: 2022/06/30 01:52:33 by mnathali         ###   ########.fr       */
+/*   Updated: 2022/07/01 00:46:09 by zyasuo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ t_player	*new_player(t_map *map);
 void		player_controller(t_game *game, int key);
 int			create_trgb(int t, int r, int g, int b);
 void		draw_square(int color, t_data img, float x, float y);
-
+void		clear_player(t_player *player);
 void		draw_ray(t_game *game, t_data *img, int angle);
 
 #endif
