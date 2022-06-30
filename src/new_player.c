@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   new_player.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mnathali <mnathali@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zyasuo <zyasuo@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/28 18:54:30 by zyasuo            #+#    #+#             */
-/*   Updated: 2022/06/29 18:11:41 by mnathali         ###   ########.fr       */
+/*   Updated: 2022/06/30 16:28:37 by zyasuo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ t_pos	*get_player_pos(char **map)
 
 t_view	*get_player_view(void)
 {
-	t_view *new_view;
+	t_view	*new_view;
 
 	new_view = malloc(sizeof(t_view));
 	if (!new_view)
@@ -71,10 +71,11 @@ t_player	*new_player(t_map *map)
 	if (!player)
 		return (NULL);
 	player->pos = get_player_pos(map->map_matrix);
-	if (!player->pos)//очистить player
-		return (NULL);
 	player->view = get_player_view();
-	if (!player->view)//очистить player и player->pos
+	if (!player->pos || !player->view)
+	{
+		clear_player(player);
 		return (NULL);
+	}
 	return (player);
 }
