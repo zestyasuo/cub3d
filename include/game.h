@@ -6,7 +6,7 @@
 /*   By: zyasuo <zyasuo@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 16:26:25 by zyasuo            #+#    #+#             */
-/*   Updated: 2022/07/01 00:46:09 by zyasuo           ###   ########.fr       */
+/*   Updated: 2022/07/01 01:49:47 by zyasuo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 # include "./cub3d.h"
 # include "./map.h"
 # define FOV 90
-# define STEP_ANGLE 2
+# define STEP_ANGLE 1
 # define STEP_FOV 2
 # define TILE 20
 # define ESCAPE 65307
@@ -76,5 +76,5 @@ int			create_trgb(int t, int r, int g, int b);
 void		draw_square(int color, t_data img, float x, float y);
 void		clear_player(t_player *player);
 void		draw_ray(t_game *game, t_data *img, int angle);
-
+void		render_rays(t_game *game, t_data *img);
 #endif

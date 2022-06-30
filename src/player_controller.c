@@ -6,7 +6,7 @@
 /*   By: zyasuo <zyasuo@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/28 19:11:41 by zyasuo            #+#    #+#             */
-/*   Updated: 2022/07/01 01:27:15 by zyasuo           ###   ########.fr       */
+/*   Updated: 2022/07/01 02:03:19 by zyasuo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,11 +46,7 @@ void	move_player(t_game *game, float y, float x)
 	game->player->pos->y += y;
 	img = render_minimap(game);
 	render_player(game);
-	draw_ray(game, img, game->player->view->angle);
-	draw_ray(game, img, game->player->view->angle
-		+ game->player->view->fov / 2);
-	draw_ray(game, img, game->player->view->angle
-		- game->player->view->fov / 2);
+	render_rays(game, img);
 	mlx_destroy_image(game->window.mlx, img->img);
 	free(img);
 }

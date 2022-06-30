@@ -6,7 +6,7 @@
 /*   By: zyasuo <zyasuo@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/29 17:36:57 by mnathali          #+#    #+#             */
-/*   Updated: 2022/06/30 16:25:28 by zyasuo           ###   ########.fr       */
+/*   Updated: 2022/07/01 02:20:27 by zyasuo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,5 +33,17 @@ void	draw_ray(t_game *game, t_data *img, int angle)
 		y = y + k_y;
 		dst = img->addr + ((int)y * img->line_length
 				+ (int)x * (img->bits_per_pixel / 8));
+	}
+}
+
+void	render_rays(t_game *game, t_data *img)
+{
+	float	i;
+
+	i = (-game->player->view->fov / 2);
+	while (i < game->player->view->fov / 2)
+	{
+		draw_ray(game, img, game->player->view->angle + i);
+		i++;
 	}
 }

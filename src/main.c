@@ -6,7 +6,7 @@
 /*   By: zyasuo <zyasuo@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 23:47:02 by zyasuo            #+#    #+#             */
-/*   Updated: 2022/06/30 16:08:43 by zyasuo           ###   ########.fr       */
+/*   Updated: 2022/07/01 01:50:07 by zyasuo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,11 +43,7 @@ int	expose_hook(t_game *game)
 	mlx_clear_window(game->window.mlx, game->window.mlx_win);
 	img = render_minimap(game);
 	render_player(game);
-	draw_ray(game, img, game->player->view->angle);
-	draw_ray(game, img, game->player->view->angle
-		+ game->player->view->fov / 2);
-	draw_ray(game, img, game->player->view->angle
-		- game->player->view->fov / 2);
+	render_rays(game, img);
 	mlx_destroy_image(game->window.mlx, img->img);
 	free(img);
 	return (0);
