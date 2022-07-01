@@ -6,12 +6,12 @@
 /*   By: zyasuo <zyasuo@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/28 19:11:41 by zyasuo            #+#    #+#             */
-/*   Updated: 2022/07/01 02:03:19 by zyasuo           ###   ########.fr       */
+/*   Updated: 2022/07/01 23:14:27 by zyasuo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/game.h"
-#define STEP 0.5
+#define STEP 0.1
 
 int	is_wall(float x, float y, char **map)
 {

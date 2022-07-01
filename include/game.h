@@ -6,7 +6,7 @@
 /*   By: zyasuo <zyasuo@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 16:26:25 by zyasuo            #+#    #+#             */
-/*   Updated: 2022/07/01 01:49:47 by zyasuo           ###   ########.fr       */
+/*   Updated: 2022/07/01 23:16:54 by zyasuo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,8 +73,9 @@ void		render_tile(int x, int y, int color, t_data img);
 t_player	*new_player(t_map *map);
 void		player_controller(t_game *game, int key);
 int			create_trgb(int t, int r, int g, int b);
-void		draw_square(int color, t_data img, float x, float y);
 void		clear_player(t_player *player);
 void		draw_ray(t_game *game, t_data *img, int angle);
+void		draw_square(int color, t_data img, float x, float y);
 void		render_rays(t_game *game, t_data *img);
+int			is_wall(float x, float y, char **map);
 #endif
