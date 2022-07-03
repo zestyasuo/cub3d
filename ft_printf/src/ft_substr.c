@@ -16,7 +16,6 @@
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
 	char	*substr;
-	int		i;
 	size_t	strlen;
 	char	*psub;
 
@@ -32,7 +31,6 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 		return ((void *)0);
 	psub = substr;
 	s += start;
-	i = 0;
 	while (len--)
 		*psub++ = *s++;
 	*psub = '\0';

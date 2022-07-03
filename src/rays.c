@@ -12,7 +12,7 @@
 
 #include "../include/game.h"
 
-float	draw_ray(t_game *game, t_data *img, int angle)
+float	draw_ray(t_game *game, int angle)
 {
 	float	x;
 	float	y;
@@ -20,7 +20,6 @@ float	draw_ray(t_game *game, t_data *img, int angle)
 	float	k_y;
 	float	lenght;
 
-	(void)img;
 	x = TILE * game->player->pos->x + TILE / 2;
 	y = TILE * game->player->pos->y + TILE / 2;
 	k_x = -sin(angle * PI / 180);
@@ -37,12 +36,18 @@ float	draw_ray(t_game *game, t_data *img, int angle)
 	return (lenght);
 }
 
-void	draw_vertical_line(t_data *img, float lenght, int x)
+void	draw_vertical_line(t_data *img, float lenght, float x)
 {
-	int	i;
+	int		i;
+	float	indent;
 
-	i = (HEIGHT / 10) * lenght;
-	while (i < HEIGHT - (HEIGHT / 10) * lenght)
+	if (x < 0)
+		x = 0;
+	if (lenght < 1)
+		lenght = 1;
+	indent = HEIGHT * (1 - 2 / (lenght + 1)) / 2;
+	i = (int)indent;
+	while (i < HEIGHT - indent)
 	{
 		my_mlx_pixel_put(img, x, i, 16777215);
 		i++;
@@ -62,9 +67,9 @@ void	render_rays(t_game *game)
 	i = -game->player->view->fov / 2;
 	while (i < game->player->view->fov / 2)
 	{
-		lenght = draw_ray(game, &img, game->player->view->angle + i);
-		draw_vertical_line(&img, lenght, WIGHT * 9 / 10
-			- (i + game->player->view->fov / 2) * (8 * WIGHT / 10 / game->player->view->fov));
+		lenght = draw_ray(game, game->player->view->angle + i);
+		draw_vertical_line(&img, lenght * cos(i * PI / 180), WIGHT - 1
+			- (i + game->player->view->fov / 2) * (WIGHT / game->player->view->fov));
 		i += 0.2;
 	}
 	mlx_put_image_to_window(game->window.mlx, game->window.mlx_win, img.img, 0, 0);

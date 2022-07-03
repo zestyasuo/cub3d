@@ -74,7 +74,7 @@ t_player	*new_player(t_map *map);
 void		player_controller(t_game *game, int key);
 int			create_trgb(int t, int r, int g, int b);
 void		clear_player(t_player *player);
-float		draw_ray(t_game *game, t_data *img, int angle);
+float		draw_ray(t_game *game, int angle);
 void		draw_square(int color, t_data img, float x, float y);
 void		render_rays(t_game *game);
 int			is_wall(int x, int y, char **map);
