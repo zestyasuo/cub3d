@@ -18,13 +18,13 @@
 # define STEP_ANGLE 1
 # define STEP_FOV 2
 # define TILE 20
-# define ESCAPE 65307
-# define W 119
-# define A 97
-# define S 115
-# define D 100
-# define LEFT_ARROW 65361
-# define RIGHT_ARROW 65363
+# define ESCAPE 65307//mac 53
+# define W 119//mac 13
+# define A 97//mac 0
+# define S 115//mac 1
+# define D 100//mac 2
+# define LEFT_ARROW 65361//mac 123
+# define RIGHT_ARROW 65363//mac 124
 # define WHEEL_UP 4
 # define WHEEL_DOWN 5
 
@@ -65,7 +65,7 @@ typedef struct s_data
 t_game		*game_init(int length, int height, char *map_path);
 int			valid_file(char **file_array);
 void		clear_game(t_game *game);
-t_data		*render_minimap(t_game *game);
+void		render_minimap(t_game *game);
 void		render_player(t_game *game);
 
 int			get_color(char type);
@@ -74,8 +74,10 @@ t_player	*new_player(t_map *map);
 void		player_controller(t_game *game, int key);
 int			create_trgb(int t, int r, int g, int b);
 void		clear_player(t_player *player);
-void		draw_ray(t_game *game, t_data *img, int angle);
+float		draw_ray(t_game *game, t_data *img, int angle);
 void		draw_square(int color, t_data img, float x, float y);
-void		render_rays(t_game *game, t_data *img);
+void		render_rays(t_game *game);
 int			is_wall(float x, float y, char **map);
+void		my_mlx_pixel_put(t_data *data, int x, int y, int color);
+
 #endif

@@ -38,17 +38,13 @@ int	check_walls(t_pos *pos, float x, float y, char **map)
 
 void	move_player(t_game *game, float y, float x)
 {
-	t_data	*img;
-
 	if (check_walls(game->player->pos, x, y, game->map->map_matrix))
 		return ;
 	game->player->pos->x += x;
 	game->player->pos->y += y;
-	img = render_minimap(game);
+	render_minimap(game);
 	render_player(game);
-	render_rays(game, img);
-	mlx_destroy_image(game->window.mlx, img->img);
-	free(img);
+	render_rays(game);
 }
 
 float	change_angle(t_game *game, int key)

@@ -38,14 +38,10 @@ int	mouse_hook(int button, int x, int y, t_game *game)
 
 int	expose_hook(t_game *game)
 {
-	t_data	*img;
-
 	mlx_clear_window(game->window.mlx, game->window.mlx_win);
-	img = render_minimap(game);
+	render_minimap(game);
 	render_player(game);
-	render_rays(game, img);
-	mlx_destroy_image(game->window.mlx, img->img);
-	free(img);
+	render_rays(game);
 	return (0);
 }
 
