@@ -6,7 +6,7 @@
 /*   By: zyasuo <zyasuo@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/27 19:59:04 by zyasuo            #+#    #+#             */
-/*   Updated: 2022/07/01 21:41:27 by zyasuo           ###   ########.fr       */
+/*   Updated: 2022/07/04 01:46:53 by zyasuo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,15 +32,28 @@ void	render_player(t_game *game)
 {
 	static int	color;
 	t_data		img;
+	int			i;
+	int			j;
 
 	if (!color)
 		color = create_trgb(0, 0, 0, 255);
-	img.img = mlx_new_image(game->window.mlx, TILE, TILE);
+	img.img = mlx_new_image(game->window.mlx, PLAYER, PLAYER);
 	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length,
 			&img.endian);
-	draw_square(color, img, 0, 0);
+	i = 0;
+	while (i < PLAYER)
+	{
+		j = 0;
+		while (j < PLAYER)
+		{
+			my_mlx_pixel_put(&img, j, i, color);
+			j++;
+		}
+		i++;
+	}
 	mlx_put_image_to_window(game->window.mlx, game->window.mlx_win,
-		img.img, game->player->pos->x * TILE, game->player->pos->y * TILE);
+		img.img, (game->player->pos->x - 0.5 * (1.0 * PLAYER / TILE)) * TILE,
+		(game->player->pos->y - 0.5 * (1.0 * PLAYER / TILE)) * TILE);
 	mlx_destroy_image(game->window.mlx, img.img);
 }
 
@@ -68,4 +81,5 @@ void	render_minimap(t_game *game)
 	}
 	mlx_put_image_to_window(game->window.mlx, game->window.mlx_win,
 		img.img, 0, 0);
+	mlx_destroy_image(game->window.mlx, img.img);
 }

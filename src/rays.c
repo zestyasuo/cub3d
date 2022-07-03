@@ -6,7 +6,7 @@
 /*   By: zyasuo <zyasuo@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/29 17:36:57 by mnathali          #+#    #+#             */
-/*   Updated: 2022/07/03 17:46:01 by zyasuo           ###   ########.fr       */
+/*   Updated: 2022/07/04 01:16:22 by zyasuo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ float	draw_ray(t_game *game, int angle)
 	float	k_y;
 	float	lenght;
 
-	x = TILE * game->player->pos->x + TILE / 2;
-	y = TILE * game->player->pos->y + TILE / 2;
+	x = TILE * game->player->pos->x;
+	y = TILE * game->player->pos->y;
 	k_x = -sin(angle * PI / 180);
 	k_y = -cos(angle * PI / 180);
 	while (!is_wall(floorf(x / (float)TILE),
@@ -32,7 +32,7 @@ float	draw_ray(t_game *game, int angle)
 		y += k_y;
 	}
 	lenght = sqrt(pow((x - (TILE * game->player->pos->x + TILE / 2)) / TILE, 2)
-		+ pow((y - (TILE * game->player->pos->y + TILE / 2)) / TILE, 2));
+			+ pow((y - (TILE * game->player->pos->y + TILE / 2)) / TILE, 2));
 	return (lenght);
 }
 
@@ -69,9 +69,11 @@ void	render_rays(t_game *game)
 	{
 		lenght = draw_ray(game, game->player->view->angle + i);
 		draw_vertical_line(&img, lenght * cos(i * PI / 180), WIGHT - 1
-			- (i + game->player->view->fov / 2) * (WIGHT / game->player->view->fov));
+			- (i + game->player->view->fov / 2)
+			* (WIGHT / game->player->view->fov));
 		i += 0.2;
 	}
-	mlx_put_image_to_window(game->window.mlx, game->window.mlx_win, img.img, 0, 0);
+	mlx_put_image_to_window(game->window.mlx, game->window.mlx_win,
+		img.img, 0, game->map->height * (TILE - 1));
 	mlx_destroy_image(game->window.mlx, img.img);
 }

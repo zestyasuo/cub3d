@@ -6,7 +6,7 @@
 /*   By: zyasuo <zyasuo@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/28 19:11:41 by zyasuo            #+#    #+#             */
-/*   Updated: 2022/07/03 17:49:45 by zyasuo           ###   ########.fr       */
+/*   Updated: 2022/07/04 01:50:28 by zyasuo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,14 @@ int	is_wall(int x, int y, char **map)
 int	check_walls(t_pos *pos, float x, float y, char **map)
 {
 	return (
-		is_wall(pos->x + x, pos->y + y, map)
-		|| is_wall(floorf(pos->x + x + 1), floorf(pos->y + y + 1), map)
+		is_wall(floorf(pos->x + 0.5 * (1.0 * PLAYER / TILE) + x),
+			floorf(pos->y + 0.5 * (1.0 * PLAYER / TILE) + y), map)
+		|| is_wall(floorf(pos->x - 0.5 * (1.0 * PLAYER / TILE) + x),
+			floorf(pos->y - 0.5 * (1.0 * PLAYER / TILE) + y), map)
+		|| is_wall(floorf(pos->x + 0.5 * (1.0 * PLAYER / TILE) + x),
+			floorf(pos->y - 0.5 * (1.0 * PLAYER / TILE) + y), map)
+		|| is_wall(floorf(pos->x - 0.5 * (1.0 * PLAYER / TILE) + x),
+			floorf(pos->y + 0.5 * (1.0 * PLAYER / TILE) + y), map)
 	);
 }
 

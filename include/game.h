@@ -6,7 +6,7 @@
 /*   By: zyasuo <zyasuo@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 16:26:25 by zyasuo            #+#    #+#             */
-/*   Updated: 2022/07/03 17:50:28 by zyasuo           ###   ########.fr       */
+/*   Updated: 2022/07/04 01:51:17 by zyasuo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 # define GAME_H
 # include "./cub3d.h"
 # include "./map.h"
-# define FOV 90
+# define FOV 60
 # define STEP_ANGLE 1
 # define STEP_FOV 2
-# define TILE 20
+# define TILE 10
 # define ESCAPE 65307//mac 53
 # define W 119//mac 13
 # define A 97//mac 0
@@ -27,6 +27,7 @@
 # define RIGHT_ARROW 65363//mac 124
 # define WHEEL_UP 4
 # define WHEEL_DOWN 5
+# define PLAYER 7
 
 typedef struct s_pos
 {

@@ -6,7 +6,7 @@
 /*   By: zyasuo <zyasuo@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/28 18:54:30 by zyasuo            #+#    #+#             */
-/*   Updated: 2022/06/30 16:28:37 by zyasuo           ###   ########.fr       */
+/*   Updated: 2022/07/04 01:16:08 by zyasuo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,8 @@ t_player	*new_player(t_map *map)
 	if (!player)
 		return (NULL);
 	player->pos = get_player_pos(map->map_matrix);
+	player->pos->x += 0.5;
+	player->pos->y += 0.5;
 	player->view = get_player_view();
 	if (!player->pos || !player->view)
 	{
