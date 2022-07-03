@@ -6,25 +6,16 @@
 /*   By: zyasuo <zyasuo@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/28 19:11:41 by zyasuo            #+#    #+#             */
-/*   Updated: 2022/07/01 23:14:27 by zyasuo           ###   ########.fr       */
+/*   Updated: 2022/07/03 17:49:45 by zyasuo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/game.h"
 #define STEP 0.1
 
-int	is_wall(float x, float y, char **map)
+int	is_wall(int x, int y, char **map)
 {
-	int	ceil_x;
-	int	ceil_y;
-	int	floor_x;
-	int	floor_y;
-
-	ceil_x = ceilf(x);
-	ceil_y = ceilf(y);
-	floor_x = floorf(x);
-	floor_y = floorf(y);
-	if (map[ceil_y][ceil_x] == '1' || map[floor_y][floor_x] == '1')
+	if (map[y][x] == '1')
 		return (1);
 	return (0);
 }
@@ -33,6 +24,7 @@ int	check_walls(t_pos *pos, float x, float y, char **map)
 {
 	return (
 		is_wall(pos->x + x, pos->y + y, map)
+		|| is_wall(floorf(pos->x + x + 1), floorf(pos->y + y + 1), map)
 	);
 }
 
