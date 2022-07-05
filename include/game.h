@@ -68,6 +68,7 @@ int			valid_file(char **file_array);
 void		clear_game(t_game *game);
 void		render_minimap(t_game *game);
 void		render_player(t_game *game);
+void		destroy_images_in_list(void *mlx, t_list *textures);
 
 int			get_color(char type);
 void		render_tile(int x, int y, int color, t_data img);
@@ -75,7 +76,7 @@ t_player	*new_player(t_map *map);
 void		player_controller(t_game *game, int key);
 int			create_trgb(int t, int r, int g, int b);
 void		clear_player(t_player *player);
-float		draw_ray(t_game *game, int angle);
+float		draw_ray(t_game *game, float angle);
 void		draw_square(int color, t_data img, float x, float y);
 void		render_rays(t_game *game);
 int			is_wall(int x, int y, char **map);

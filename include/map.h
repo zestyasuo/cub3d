@@ -18,6 +18,9 @@ typedef struct s_texture
 {
 	char	*path;
 	char	*id;
+	void	*texture;
+	int		height;
+	int		wight;
 }	t_texture;
 
 typedef struct s_map
@@ -40,5 +43,5 @@ void		clear_texture(void *pointer);
 void		clear_map(t_map *map);
 char		**get_map_matrix(char **file_array);
 t_texture	*get_texture_from_str(char *file_str);
-t_list		*get_textures(char **file_array);
+t_list		*get_textures(char **file_array, void *mlx);
 #endif

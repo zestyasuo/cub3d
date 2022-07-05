@@ -15,6 +15,7 @@
 
 int	destroy_window(t_game *game)
 {
+	destroy_images_in_list(game->window.mlx, game->map->textures);
 	mlx_destroy_window(game->window.mlx, game->window.mlx_win);
 	clear_game(game);
 	exit(0);

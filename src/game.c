@@ -24,7 +24,7 @@
 // 	}
 // }
 
-t_map	*new_map(char *map_path)
+t_map	*new_map(char *map_path, void *mlx)
 {
 	t_map	*new;
 	char	**file;
@@ -38,7 +38,7 @@ t_map	*new_map(char *map_path)
 		free (new);
 		return (NULL);
 	}
-	new->textures = get_textures(file);
+	new->textures = get_textures(file, mlx);
 	new->map_matrix = get_map_matrix(file);
 	if (!is_textures_valid(new->textures) || !is_map_valid(new->map_matrix))
 	{
@@ -59,14 +59,20 @@ t_game	*game_init(int length, int height, char *map_path)
 	game = malloc(sizeof (*game));
 	if (!game)
 		return (NULL);
-	game->map = new_map(map_path);
-	if (!game->map)
+	game->window.mlx = mlx_init();
+	if (!game->window.mlx)
 	{
 		free(game);
 		return (NULL);
 	}
+	game->map = new_map(map_path, game->window.mlx);
+	if (!game->map)
+	{
+		free(game->window.mlx);
+		free(game);
+		return (NULL);
+	}
 	game->player = new_player(game->map);
-	game->window.mlx = mlx_init();
 	game->window.mlx_win = mlx_new_window(game->window.mlx,
 			length, height, "cub3d");
 	return (game);

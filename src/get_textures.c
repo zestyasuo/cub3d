@@ -13,6 +13,36 @@
 #include "../include/map.h"
 #include "../include/cub3d.h"
 
+void	destroy_images_in_list(void *mlx, t_list *textures)
+{
+	while (textures)
+	{
+		if (((t_texture *)(textures->content))->texture)
+			mlx_destroy_image(mlx, ((t_texture *)(textures->content))->texture);
+		textures = textures->next;
+	}
+}
+
+void	take_texture(t_texture	**texture, void *mlx, t_list *textures)
+{
+	t_texture	*tmp;
+
+	tmp = *texture;
+	if (!ft_strcmp(tmp->id, "F") || !ft_strcmp(tmp->id, "C"))
+	{
+		tmp->texture = 0;
+		return ;
+	}
+	tmp->texture = mlx_xpm_file_to_image(mlx, tmp->path,
+		&tmp->wight, &tmp->height);
+	if (!tmp->texture)
+	{
+		clear_texture(tmp);
+		*texture = 0;
+		destroy_images_in_list(mlx, textures);
+	}
+}
+
 int	is_id_valid(char *id)
 {
 	return (!ft_strcmp(id, "NO") || !ft_strcmp(id, "SO")
@@ -47,7 +77,7 @@ t_texture	*get_texture_from_str(char *file_str)
 	return (NULL);
 }
 
-t_list	*get_textures(char **file_array)
+t_list	*get_textures(char **file_array, void *mlx)
 {
 	t_list		*textures;
 	int			map_id;
@@ -62,6 +92,7 @@ t_list	*get_textures(char **file_array)
 		if (ft_strlen(file_array[i]))
 		{
 			tmp = get_texture_from_str(file_array[i]);
+			take_texture(&tmp, mlx, textures);
 			if (tmp)
 				ft_lstadd_back(&textures, ft_lstnew(tmp));
 			else
