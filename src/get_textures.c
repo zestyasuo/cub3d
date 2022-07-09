@@ -12,6 +12,8 @@
 
 #include "../include/map.h"
 #include "../include/cub3d.h"
+#include "../include/game.h"
+
 
 void	destroy_images_in_list(void *mlx, t_list *textures)
 {
@@ -30,6 +32,9 @@ void	take_texture(t_texture	**texture, void *mlx, t_list *textures)
 	tmp = *texture;
 	if (!ft_strcmp(tmp->id, "F") || !ft_strcmp(tmp->id, "C"))
 	{
+		tmp->wight = create_trgb(0, ft_atoi(tmp->path + 1),
+			ft_atoi(ft_strchr(tmp->path, ',') + 1),
+			ft_atoi(ft_strrchr(tmp->path, ',') + 1));
 		tmp->texture = 0;
 		return ;
 	}

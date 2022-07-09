@@ -15,7 +15,7 @@
 # include "./cub3d.h"
 # include "./map.h"
 # define FOV 60
-# define STEP_ANGLE 1
+# define STEP_ANGLE 5
 # define STEP_FOV 2
 # define TILE 10
 # define ESCAPE 65307//mac 53
@@ -28,6 +28,15 @@
 # define WHEEL_UP 4
 # define WHEEL_DOWN 5
 # define PLAYER 7
+
+typedef struct s_draw
+{
+	t_texture	*texture;
+	float		x;
+	float		y;
+	float		lenght;
+	float		part_of_texture;
+}	t_draw;
 
 typedef struct s_pos
 {
@@ -69,6 +78,7 @@ void		clear_game(t_game *game);
 void		render_minimap(t_game *game);
 void		render_player(t_game *game);
 void		destroy_images_in_list(void *mlx, t_list *textures);
+t_texture	*find_texture(t_list *textures, char *id);
 
 int			get_color(char type);
 void		render_tile(int x, int y, int color, t_data img);
@@ -76,7 +86,7 @@ t_player	*new_player(t_map *map);
 void		player_controller(t_game *game, int key);
 int			create_trgb(int t, int r, int g, int b);
 void		clear_player(t_player *player);
-float		draw_ray(t_game *game, float angle);
+float		draw_ray(t_game *game, float angle, float *x, float *y);
 void		draw_square(int color, t_data img, float x, float y);
 void		render_rays(t_game *game);
 int			is_wall(int x, int y, char **map);
