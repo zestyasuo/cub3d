@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "../include/game.h"
-#define STEP 0.1
 
 int	is_wall(int x, int y, char **map)
 {

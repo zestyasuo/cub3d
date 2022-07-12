@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zyasuo <zyasuo@student.21-school.ru>       +#+  +:+       +#+        */
+/*   By: nikita <nikita@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 16:26:25 by zyasuo            #+#    #+#             */
-/*   Updated: 2022/07/04 01:51:17 by zyasuo           ###   ########.fr       */
+/*   Updated: 2022/07/13 00:56:47 by nikita           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,15 @@
 # define FOV 60
 # define STEP_ANGLE 5
 # define STEP_FOV 2
-# define TILE 10
-# define ESCAPE 65307//mac 53
-# define W 119//mac 13
-# define A 97//mac 0
-# define S 115//mac 1
-# define D 100//mac 2
-# define LEFT_ARROW 65361//mac 123
-# define RIGHT_ARROW 65363//mac 124
+# define STEP 0.5
+# define TILE 100
+# define ESCAPE 53
+# define W 13
+# define A 0
+# define S 1
+# define D 2
+# define LEFT_ARROW 123
+# define RIGHT_ARROW 124
 # define WHEEL_UP 4
 # define WHEEL_DOWN 5
 # define PLAYER 7
