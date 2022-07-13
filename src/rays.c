@@ -6,7 +6,7 @@
 /*   By: nikita <nikita@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/29 17:36:57 by mnathali          #+#    #+#             */
-/*   Updated: 2022/07/13 00:56:07 by nikita           ###   ########.fr       */
+/*   Updated: 2022/07/13 21:01:14 by nikita           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,9 +98,11 @@ void	draw_vertical_line(t_game *game, t_data *img, t_draw *line, float x)
 
 void	choose_texture(t_game *game, t_draw *line)
 {
-	char	c;
-
-	c = 'x';
+	static int x;
+	
+	if (line->texture && ((int)line->y % TILE == 0
+		|| ((int)line->y + 1) % TILE == 0) && x == (int)line->x)
+		return ;
 	if ((int)line->y < game->player->pos->y * TILE
 		&& ((int)line->y + 1) % TILE == 0)
 		line->texture = find_texture(game->map->textures, "NO");
@@ -115,13 +117,10 @@ void	choose_texture(t_game *game, t_draw *line)
 		line->texture = find_texture(game->map->textures, "WE");
 	if (!ft_strcmp(line->texture->id, "EA")
 		|| !ft_strcmp(line->texture->id, "WE"))
-		c = 'y';
-	line->x = line->x - ((int)line->x / TILE) * TILE;
-	line->y = line->y - ((int)line->y / TILE) * TILE;
-	if (c == 'x')
-		line->part_of_texture = line->x / TILE;
+		line->part_of_texture = (line->y - ((int)line->y / TILE) * TILE) / TILE;
 	else
-		line->part_of_texture = line->y / TILE;
+		line->part_of_texture = (line->x - ((int)line->x / TILE) * TILE) / TILE;
+	x = (int)line->x;
 }
 
 void	render_rays(t_game *game)
