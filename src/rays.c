@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rays.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nikita <nikita@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mnathali <mnathali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/29 17:36:57 by mnathali          #+#    #+#             */
-/*   Updated: 2022/07/13 21:01:14 by nikita           ###   ########.fr       */
+/*   Updated: 2022/07/15 02:09:58 by mnathali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,16 +40,17 @@ unsigned int	take_color(t_data *t_img, t_draw *line, float part_y)
 {
 	unsigned int	offset;
 
-	offset = *(unsigned int *)(t_img->addr +
-		((int)(part_y * line->texture->height) * t_img->line_length
-		+ (int)(line->part_of_texture * line->texture->wight)
-		* (t_img->bits_per_pixel / 8)));
+	part_y = fabs(part_y);
+	offset = *(unsigned int *)(t_img->addr
+			+ ((int)(part_y * line->texture->height) * t_img->line_length
+				+ (int)(line->part_of_texture * line->texture->wight)
+				* (t_img->bits_per_pixel / 8)));
 	return (offset);
 }
 
 void	put_ceiling_or_floor(t_data *img, int x, int i, t_texture *texture)
 {
-	int j;
+	int	j;
 	int	color;
 
 	color = texture->wight;
@@ -77,11 +78,11 @@ void	draw_vertical_line(t_game *game, t_data *img, t_draw *line, float x)
 	t_img.img = line->texture->texture;
 	if (t_img.img)
 		t_img.addr = mlx_get_data_addr(t_img.img, &t_img.bits_per_pixel,
-		&t_img.line_length, &t_img.endian);
+				&t_img.line_length, &t_img.endian);
 	x = WIGHT * (0.5 - x / game->player->view->fov) - 1;
 	if (x < 0)
 		x = 0;
-	indent = HEIGHT * (1 - 2 / (line->lenght + 1)) / 2;
+	indent = (HEIGHT * (1 - 2 / (line->lenght + 1))) / 2;
 	i = (int)indent;
 	if (line->lenght < 1)
 		i = 0;
@@ -89,7 +90,7 @@ void	draw_vertical_line(t_game *game, t_data *img, t_draw *line, float x)
 	while (i < HEIGHT - indent && i < HEIGHT && t_img.img)
 	{
 		color = take_color(&t_img, line,
-			(i - indent) / (HEIGHT - (2 * (int)indent)));
+				(i - indent) / (HEIGHT - (2 * indent)));
 		my_mlx_pixel_put(img, x, i, color);
 		i++;
 	}
@@ -98,10 +99,10 @@ void	draw_vertical_line(t_game *game, t_data *img, t_draw *line, float x)
 
 void	choose_texture(t_game *game, t_draw *line)
 {
-	static int x;
-	
+	static int	x;
+
 	if (line->texture && ((int)line->y % TILE == 0
-		|| ((int)line->y + 1) % TILE == 0) && x == (int)line->x)
+			|| ((int)line->y + 1) % TILE == 0) && x == (int)line->x)
 		return ;
 	if ((int)line->y < game->player->pos->y * TILE
 		&& ((int)line->y + 1) % TILE == 0)

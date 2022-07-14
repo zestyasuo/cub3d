@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zyasuo <zyasuo@student.21-school.ru>       +#+  +:+       +#+        */
+/*   By: mnathali <mnathali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 23:47:02 by zyasuo            #+#    #+#             */
-/*   Updated: 2022/07/04 01:30:29 by zyasuo           ###   ########.fr       */
+/*   Updated: 2022/07/15 02:04:32 by mnathali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,8 @@ int	mouse_hook(int button, int x, int y, t_game *game)
 int	expose_hook(t_game *game)
 {
 	mlx_clear_window(game->window.mlx, game->window.mlx_win);
-	render_minimap(game);
-	render_player(game);
+/* 	render_minimap(game);
+	render_player(game); */
 	render_rays(game);
 	return (0);
 }

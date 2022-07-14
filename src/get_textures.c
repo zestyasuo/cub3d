@@ -3,17 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   get_textures.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zyasuo <zyasuo@student.21-school.ru>       +#+  +:+       +#+        */
+/*   By: mnathali <mnathali@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/22 18:32:42 by zyasuo            #+#    #+#             */
-/*   Updated: 2022/06/27 01:46:36 by zyasuo           ###   ########.fr       */
+/*   Updated: 2022/07/15 02:10:43 by mnathali         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/map.h"
 #include "../include/cub3d.h"
 #include "../include/game.h"
-
 
 void	destroy_images_in_list(void *mlx, t_list *textures)
 {
@@ -33,13 +32,13 @@ void	take_texture(t_texture	**texture, void *mlx, t_list *textures)
 	if (!ft_strcmp(tmp->id, "F") || !ft_strcmp(tmp->id, "C"))
 	{
 		tmp->wight = create_trgb(0, ft_atoi(tmp->path + 1),
-			ft_atoi(ft_strchr(tmp->path, ',') + 1),
-			ft_atoi(ft_strrchr(tmp->path, ',') + 1));
+				ft_atoi(ft_strchr(tmp->path, ',') + 1),
+				ft_atoi(ft_strrchr(tmp->path, ',') + 1));
 		tmp->texture = 0;
 		return ;
 	}
 	tmp->texture = mlx_xpm_file_to_image(mlx, tmp->path,
-		&tmp->wight, &tmp->height);
+			&tmp->wight, &tmp->height);
 	if (!tmp->texture)
 	{
 		clear_texture(tmp);
