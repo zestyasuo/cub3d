@@ -3,43 +3,43 @@
 /*                                                        :::      ::::::::   */
 /*   rays.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mnathali <mnathali@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nikita <nikita@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/29 17:36:57 by mnathali          #+#    #+#             */
-/*   Updated: 2022/07/15 02:09:58 by mnathali         ###   ########.fr       */
+/*   Updated: 2022/07/16 22:51:21 by nikita           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/game.h"
 
-float	draw_ray(t_game *game, float angle, float *x, float *y)
+float	lenght_of_ray(t_game *game, float angle, float *x, float *y)
 {
 	float	k_x;
 	float	k_y;
-	float	lenght;
+	char	*dst;
 
 	angle += game->player->view->angle;
 	*x = TILE * game->player->pos->x;
 	*y = TILE * game->player->pos->y;
 	k_x = -sin(angle * PI / 180);
 	k_y = -cos(angle * PI / 180);
-	while (!is_wall(floorf(*x / (float)TILE),
-			floorf(*y / (float)TILE), game->map->map_matrix))
+	dst = game->map_img->addr + ((int)*y * game->map_img->line_length + (int)*x * (game->map_img->bits_per_pixel / 8));
+	while (*(unsigned int *)dst != RED)
 	{
-		mlx_pixel_put(game->window.mlx, game->window.mlx_win, *x, *y,
-			16777215);
 		*x += k_x;
 		*y += k_y;
+		dst = game->map_img->addr + ((int)*y * game->map_img->line_length + (int)*x * (game->map_img->bits_per_pixel / 8));
 	}
-	lenght = sqrt(pow((*x - (TILE * game->player->pos->x)) / TILE, 2)
-			+ pow((*y - (TILE * game->player->pos->y)) / TILE, 2));
-	return (lenght);
+	return (sqrt(pow((*x - (TILE * game->player->pos->x)) / TILE, 2)
+			+ pow((*y - (TILE * game->player->pos->y)) / TILE, 2)));
 }
 
-unsigned int	take_color(t_data *t_img, t_draw *line, float part_y)
+unsigned int	take_color(t_data *t_img, t_draw *line, int i, float indent)
 {
 	unsigned int	offset;
+	float			part_y;
 
+	part_y = (i - indent) / (HEIGHT - (2 * indent));
 	part_y = fabs(part_y);
 	offset = *(unsigned int *)(t_img->addr
 			+ ((int)(part_y * line->texture->height) * t_img->line_length
@@ -72,8 +72,7 @@ void	draw_vertical_line(t_game *game, t_data *img, t_draw *line, float x)
 {
 	int				i;
 	float			indent;
-	t_data			t_img;
-	unsigned int	color;
+	static t_data	t_img;
 
 	t_img.img = line->texture->texture;
 	if (t_img.img)
@@ -87,11 +86,9 @@ void	draw_vertical_line(t_game *game, t_data *img, t_draw *line, float x)
 	if (line->lenght < 1)
 		i = 0;
 	put_ceiling_or_floor(img, x, i, find_texture(game->map->textures, "C"));
-	while (i < HEIGHT - indent && i < HEIGHT && t_img.img)
+	while (i < HEIGHT - indent && i < HEIGHT && t_img.img && x < WIGHT)
 	{
-		color = take_color(&t_img, line,
-				(i - indent) / (HEIGHT - (2 * indent)));
-		my_mlx_pixel_put(img, x, i, color);
+		my_mlx_pixel_put(img, x, i, take_color(&t_img, line, i, indent));
 		i++;
 	}
 	put_ceiling_or_floor(img, x, i, find_texture(game->map->textures, "F"));
@@ -116,6 +113,8 @@ void	choose_texture(t_game *game, t_draw *line)
 	else if ((int)line->x > game->player->pos->x * TILE
 		&& (int)line->x % TILE == 0)
 		line->texture = find_texture(game->map->textures, "WE");
+	else
+		return ;
 	if (!ft_strcmp(line->texture->id, "EA")
 		|| !ft_strcmp(line->texture->id, "WE"))
 		line->part_of_texture = (line->y - ((int)line->y / TILE) * TILE) / TILE;
@@ -124,7 +123,7 @@ void	choose_texture(t_game *game, t_draw *line)
 	x = (int)line->x;
 }
 
-void	render_rays(t_game *game)
+void	three_dimensional_image(t_game *game)
 {
 	float		i;
 	t_draw		line;
@@ -137,12 +136,12 @@ void	render_rays(t_game *game)
 	i = -game->player->view->fov / 2;
 	while (i <= game->player->view->fov / 2)
 	{
-		line.lenght = draw_ray(game, i, &line.x, &line.y) * cos(i * PI / 180);
+		line.lenght = lenght_of_ray(game, i, &line.x, &line.y) * cos(i * PI / 180);
 		choose_texture(game, &line);
 		draw_vertical_line(game, &img, &line, i);
 		i += 0.02;
 	}
 	mlx_put_image_to_window(game->window.mlx, game->window.mlx_win,
-		img.img, 0, 0);//game->map->height * (TILE - 1));
+		img.img, 0, 0);
 	mlx_destroy_image(game->window.mlx, img.img);
 }

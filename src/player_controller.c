@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player_controller.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mnathali <mnathali@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nikita <nikita@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/28 19:11:41 by zyasuo            #+#    #+#             */
-/*   Updated: 2022/07/15 02:04:26 by mnathali         ###   ########.fr       */
+/*   Updated: 2022/07/16 17:23:23 by nikita           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,9 @@ void	move_player(t_game *game, float y, float x)
 		return ;
 	game->player->pos->x += x;
 	game->player->pos->y += y;
-/* 	render_minimap(game);
-	render_player(game); */
-	render_rays(game);
+	three_dimensional_image(game);
+ 	render_minimap(game);
+	render_player(game);
 }
 
 float	change_angle(t_game *game, int key)

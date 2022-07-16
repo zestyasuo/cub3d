@@ -6,7 +6,7 @@
 /*   By: nikita <nikita@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 16:26:25 by zyasuo            #+#    #+#             */
-/*   Updated: 2022/07/13 21:11:45 by nikita           ###   ########.fr       */
+/*   Updated: 2022/07/16 22:56:30 by nikita           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,11 @@
 # define RIGHT_ARROW 65363//mac 124
 # define WHEEL_UP 4
 # define WHEEL_DOWN 5
-# define PLAYER 7
+# define PLAYER 30
+# define WHITE 16777215
+# define RED 16711680
+# define GREEN 65280
+# define BLUE 255
 
 typedef struct s_draw
 {
@@ -57,13 +61,6 @@ typedef struct s_player
 	t_view	*view;
 }	t_player;
 
-typedef struct s_game
-{
-	t_window	window;
-	t_map		*map;
-	t_player	*player;
-}	t_game;
-
 typedef struct s_data
 {
 	void	*img;
@@ -73,6 +70,14 @@ typedef struct s_data
 	int		endian;
 }	t_data;
 
+typedef struct s_game
+{
+	t_window	window;
+	t_map		*map;
+	t_player	*player;
+	t_data		*map_img;
+}	t_game;
+
 t_game		*game_init(int length, int height, char *map_path);
 int			valid_file(char **file_array);
 void		clear_game(t_game *game);
@@ -80,16 +85,18 @@ void		render_minimap(t_game *game);
 void		render_player(t_game *game);
 void		destroy_images_in_list(void *mlx, t_list *textures);
 t_texture	*find_texture(t_list *textures, char *id);
+int			key_hook(int key, t_game *game);
+void		plug_holes(t_data *img, int height, int wight, unsigned int t);
 
 int			get_color(char type);
-void		render_tile(int x, int y, int color, t_data img);
+void		render_tile(int *coord, int tile, int color, t_data img);
 t_player	*new_player(t_map *map);
 void		player_controller(t_game *game, int key);
 int			create_trgb(int t, int r, int g, int b);
 void		clear_player(t_player *player);
-float		draw_ray(t_game *game, float angle, float *x, float *y);
-void		draw_square(int color, t_data img, float x, float y);
-void		render_rays(t_game *game);
+float		lenght_of_ray(t_game *game, float angle, float *x, float *y);
+void		draw_square(int color, t_data img, int *coord, int tile);
+void		three_dimensional_image(t_game *game);
 int			is_wall(int x, int y, char **map);
 void		my_mlx_pixel_put(t_data *data, int x, int y, int color);
 

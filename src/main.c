@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mnathali <mnathali@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nikita <nikita@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 23:47:02 by zyasuo            #+#    #+#             */
-/*   Updated: 2022/07/15 02:04:32 by mnathali         ###   ########.fr       */
+/*   Updated: 2022/07/16 21:41:15 by nikita           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,11 @@
 int	destroy_window(t_game *game)
 {
 	destroy_images_in_list(game->window.mlx, game->map->textures);
+	if (game->map_img)
+	{
+		mlx_destroy_image(game->window.mlx, game->map_img->img);
+		free(game->map_img);
+	}
 	mlx_destroy_window(game->window.mlx, game->window.mlx_win);
 	clear_game(game);
 	exit(0);
@@ -40,9 +45,9 @@ int	mouse_hook(int button, int x, int y, t_game *game)
 int	expose_hook(t_game *game)
 {
 	mlx_clear_window(game->window.mlx, game->window.mlx_win);
-/* 	render_minimap(game);
-	render_player(game); */
-	render_rays(game);
+	three_dimensional_image(game);
+	render_minimap(game);
+	render_player(game);
 	return (0);
 }
 
