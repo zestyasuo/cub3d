@@ -88,6 +88,7 @@ void			plug_holes(t_data *img, int height, int wight, unsigned int t);
 unsigned int	check_color(int i, int j, t_data *img);
 unsigned int	take_color(t_data *t_img, t_draw *line, int i, float indent);
 void			*end_and_free(void *first, void *second);
+int				valid_color(char *str);
 
 int				get_color(char type);
 t_player		*new_player(t_map *map);

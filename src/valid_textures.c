@@ -53,8 +53,8 @@ int	is_textures_valid(t_list *textures)
 	if (!textures)
 		return (0);
 	return (!has_dup(textures) && find_texture(textures, "NO")
-		&& find_texture(textures, "SO"), find_texture(textures, "WE")
-		&& find_texture(textures, "EA"), find_texture(textures, "F")
+		&& find_texture(textures, "SO") && find_texture(textures, "WE")
+		&& find_texture(textures, "EA") && find_texture(textures, "F")
 		&& find_texture(textures, "C")
 	);
 }

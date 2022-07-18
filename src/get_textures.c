@@ -32,7 +32,7 @@ void	take_texture(t_texture	**texture, void *mlx)
 	if (!tmp)
 		return ;
 	if ((!ft_strcmp(tmp->id, "F") || !ft_strcmp(tmp->id, "C"))
-		&& ft_strchr(tmp->path, ',')
+		&& ft_strchr(tmp->path, ',') && valid_color(tmp->path)
 		&& ft_strchr(tmp->path, ',') != ft_strrchr(tmp->path, ','))
 	{
 		tmp->wight = create_trgb(0, ft_atoi(tmp->path + 1),
@@ -41,9 +41,10 @@ void	take_texture(t_texture	**texture, void *mlx)
 		tmp->texture = 0;
 		return ;
 	}
-	tmp->texture = mlx_xpm_file_to_image(mlx, tmp->path,
-			&tmp->wight, &tmp->height);
-	if (!tmp->texture)
+	if (ft_strcmp(tmp->id, "F") && ft_strcmp(tmp->id, "C"))
+		tmp->texture = mlx_xpm_file_to_image(mlx, tmp->path,
+				&tmp->wight, &tmp->height);
+	if (!tmp->texture || !ft_strcmp(tmp->id, "F") || !ft_strcmp(tmp->id, "C"))
 	{
 		clear_texture(tmp);
 		*texture = 0;
