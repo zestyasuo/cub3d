@@ -6,7 +6,7 @@
 /*   By: zyasuo <zyasuo@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/28 18:54:30 by zyasuo            #+#    #+#             */
-/*   Updated: 2022/07/04 01:16:08 by zyasuo           ###   ########.fr       */
+/*   Updated: 2022/07/18 14:15:34 by zyasuo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	is_player(char c)
 {
 	if (c == 'N' || c == 'S' || c == 'W' || c == 'E')
-		return (1);
+		return (c);
 	return (0);
 }
 
@@ -51,14 +51,21 @@ t_pos	*get_player_pos(char **map)
 	return (NULL);
 }
 
-t_view	*get_player_view(void)
+t_view	*get_player_view(char dir)
 {
 	t_view	*new_view;
 
 	new_view = malloc(sizeof(t_view));
 	if (!new_view)
 		return (NULL);
-	new_view->angle = 0;
+	if (dir == 'N')
+		new_view->angle = 0;
+	if (dir == 'E')
+		new_view->angle = -90;
+	if (dir == 'S')
+		new_view->angle = 180;
+	if (dir == 'W')
+		new_view->angle = 90;
 	new_view->fov = FOV;
 	return (new_view);
 }
@@ -71,13 +78,19 @@ t_player	*new_player(t_map *map)
 	if (!player)
 		return (NULL);
 	player->pos = get_player_pos(map->map_matrix);
-	player->pos->x += 0.5;
-	player->pos->y += 0.5;
-	player->view = get_player_view();
-	if (!player->pos || !player->view)
+	if (!player->pos)
+	{
+		clear_player (player);
+		return (NULL);
+	}
+	player->view = get_player_view(
+			map->map_matrix[(int)player->pos->y][(int)player->pos->x]);
+	if (!player->view)
 	{
 		clear_player(player);
 		return (NULL);
 	}
+	player->pos->x += 0.5;
+	player->pos->y += 0.5;
 	return (player);
 }

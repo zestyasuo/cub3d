@@ -58,7 +58,7 @@ FT_PRINTF 	=	ft_printf/libftprintf.a
 FT_PRINTF_PATH	=	./ft_printf/include
 
 HEAD_DEP	=	${HEADERS:%.h=${INCDIR}/%.h}
-MLXLIB	=	mlx/libmlx.a
+MLXLIB	=	/usr/local/lib/libmlx.a
 
 OBJS	=	${SRC:%.c=${OBJDIR}/%.o}
 
@@ -72,19 +72,16 @@ endif
 
 ${FT_PRINTF}:
 	@echo "Making the library."
-	${MAKE} -j -s -C ft_printf/
+	${MAKE} -j -C ft_printf/
 
 ${OBJDIR} :
 	mkdir ${OBJDIR}
 
-${MLXLIB} :
-	${MAKE} -C mlx
-
 ${OBJDIR}/%.o: ${SRCDIR}/%.c ${HEAD_DEP} | ${OBJDIR}
 	$(CC) ${CFLAGS} -I/usr/include -I ${INCDIR} -I ${FT_PRINTF_PATH} -Imlx -O3 -c $< -o $@
 
-$(NAME): $(OBJS) ${MLXLIB} 
-	$(CC) ${CFLAGS} $^ ${FT_PRINTF} -Lmlx -lmlx -framework OpenGL -framework AppKit -o $(NAME)
+$(NAME): $(OBJS)
+	$(CC) ${CFLAGS} $^ ${FT_PRINTF} ${MLXLIB} -framework OpenGL -framework AppKit -o $(NAME)
 
 bonus:
 	@make SRC="$(B_SRC)" NAME="$(B_NAME)" all

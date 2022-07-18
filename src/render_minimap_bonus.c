@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render_minimap_bonus.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mnathali <mnathali@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zyasuo <zyasuo@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/27 19:59:04 by zyasuo            #+#    #+#             */
-/*   Updated: 2022/07/18 02:05:57 by mnathali         ###   ########.fr       */
+/*   Updated: 2022/07/18 14:02:38 by zyasuo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	draw_ray(t_game *game, float angle, t_data *img)
 	while (*(unsigned int *)dst != RED + (unsigned int)create_trgb(150, 0, 0, 0)
 		&& *(unsigned int *)dst != (unsigned int)create_trgb(150, 0, 0, 0))
 	{
-		mlx_pixel_put(game->window.mlx, game->window.mlx_win, x, y, WHITE);
+		my_mlx_pixel_put(img, x, y, WHITE);
 		x += k_x;
 		y += k_y;
 		dst = img->addr + ((int)y * img->line_length
@@ -80,10 +80,10 @@ void	render_minimap(t_game *game)
 		another_cycle(i_j, tile, game, img);
 		i_j[0]++;
 	}
-	mlx_put_image_to_window(game->window.mlx, game->window.mlx_win,
-		img.img, 0, 0);
 	plug_holes(&img, game->map->height * tile, game->map->length * tile,
 		create_trgb(150, 0, 0, 0));
 	render_rays(game, &img);
+	mlx_put_image_to_window(game->window.mlx, game->window.mlx_win,
+		img.img, 0, 0);
 	mlx_destroy_image(game->window.mlx, img.img);
 }
