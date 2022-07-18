@@ -20,8 +20,8 @@ unsigned int	take_color(t_data *t_img, t_draw *line, int i, float indent)
 	part_y = (i - indent) / (HEIGHT - (2 * indent));
 	part_y = fabs(part_y);
 	offset = *(unsigned int *)(t_img->addr
-			+ ((int)(part_y * line->texture->height) * t_img->line_length
-				+ (int)(line->part_of_texture * line->texture->wight)
+			+ ((int)(part_y * (line->texture->height - 1)) * t_img->line_length
+				+ (int)(line->part_of_texture * (line->texture->wight - 1))
 				* (t_img->bits_per_pixel / 8)));
 	return (offset);
 }

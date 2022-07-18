@@ -84,15 +84,15 @@ ${OBJDIR}/%.o: ${SRCDIR}/%.c ${HEAD_DEP} | ${OBJDIR}
 	$(CC) ${CFLAGS} -I/usr/include -I ${INCDIR} -I ${FT_PRINTF_PATH} -Imlx -O3 -c $< -o $@
 
 $(NAME): $(OBJS) ${MLXLIB} 
-	$(CC) ${CFLAGS} $^ ${FT_PRINTF} -I includes -Lmlx -lmlx -L/usr/lib -Imlx -lXext -lX11 -lm -lz -o $@
+	$(CC) ${CFLAGS} $^ ${FT_PRINTF} -Lmlx -lmlx -framework OpenGL -framework AppKit -o $(NAME)
 
 bonus:
-	@make SRC="$(B_SRC)" all
+	@make SRC="$(B_SRC)" NAME="$(B_NAME)" all
 
 clean: 
-	rm -f ${OBJS}
+	rm -f ${OBJS} ${B_SRC:%.c=${OBJDIR}/%.o}
 
 fclean: clean
-	rm -f ${NAME}
+	rm -f ${NAME} ${B_NAME}
 
 re: fclean all
