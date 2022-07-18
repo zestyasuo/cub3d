@@ -1,7 +1,7 @@
 NAME	=	cub3d
 B_NAME	=	cub3d_bonus
-CC		=	clang
-CFLAGS	=	-Wall -Wextra -Werror -fsanitize=address
+CC		=	cc
+CFLAGS	=	-Wall -Wextra -Werror #-fsanitize=address
 
 SRC		=	main.c					\
 			game.c					\
