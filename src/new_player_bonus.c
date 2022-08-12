@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   new_player.c                                       :+:      :+:    :+:   */
+/*   new_player_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zyasuo <zyasuo@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/28 18:54:30 by zyasuo            #+#    #+#             */
-/*   Updated: 2022/08/11 23:58:30 by zyasuo           ###   ########.fr       */
+/*   Created: 2022/08/12 00:01:22 by zyasuo            #+#    #+#             */
+/*   Updated: 2022/08/12 19:09:26 by zyasuo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "game.h"
+#include "../include/game_bonus.h"
 
 int	is_player(char c)
 {
@@ -55,7 +55,7 @@ t_view	*get_player_view(char dir)
 {
 	t_view	*new_view;
 
-	new_view = malloc(sizeof(t_view));
+	new_view = malloc(sizeof(*new_view));
 	if (!new_view)
 		return (NULL);
 	if (dir == 'N')
@@ -67,6 +67,7 @@ t_view	*get_player_view(char dir)
 	if (dir == 'W')
 		new_view->angle = 90;
 	new_view->fov = FOV;
+	new_view->dir = new_dir_vector(dir);
 	return (new_view);
 }
 
@@ -88,3 +89,4 @@ t_player	*new_player(t_map *map)
 	player->pos->y += 0.5;
 	return (player);
 }
+

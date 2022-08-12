@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   game.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mnathali <mnathali@student.42.fr>          +#+  +:+       +#+        */
+/*   By: zyasuo <zyasuo@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 16:26:25 by zyasuo            #+#    #+#             */
-/*   Updated: 2022/07/18 02:04:31 by mnathali         ###   ########.fr       */
+/*   Updated: 2022/08/12 17:08:08 by zyasuo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # define STEP_FOV 2
 # define STEP 0.5
 # define TILE 100
+# if 0
 # define ESCAPE 53
 # define W 13
 # define A 0
@@ -26,6 +27,15 @@
 # define D 2
 # define LEFT_ARROW 123
 # define RIGHT_ARROW 124
+# else
+#  define ESCAPE 65307 //linux 65307 macos 53
+#  define W 119 //linux 119 macos 13
+#  define A 97 //linux 97 macos 0
+#  define S 115 // linux 115 macos 1
+#  define D 100 // linux 100 macos 2
+#  define LEFT_ARROW 65361
+#  define RIGHT_ARROW 65363
+# endif
 # define WHEEL_UP 4
 # define WHEEL_DOWN 5
 # define PLAYER 30
@@ -51,8 +61,8 @@ typedef struct s_pos
 
 typedef struct s_view
 {
-	float	angle;
-	float	fov;
+	float		angle;
+	float		fov;
 }	t_view;
 
 typedef struct s_player
@@ -94,8 +104,7 @@ int				get_color(char type);
 t_player		*new_player(t_map *map);
 void			player_controller(t_game *game, int key);
 int				create_trgb(int t, int r, int g, int b);
-void			clear_player(t_player *player);
-float			lenght_of_ray(t_game *game, float angle, float *x, float *y);
+void			*clear_player(t_player *player);
 void			draw_square(int color, t_data img, int *coord, int tile);
 void			three_dimensional_image(t_game *game);
 int				is_wall(int x, int y, char **map);

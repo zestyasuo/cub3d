@@ -6,48 +6,46 @@
 /*   By: zyasuo <zyasuo@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/27 19:59:04 by zyasuo            #+#    #+#             */
-/*   Updated: 2022/07/18 14:02:38 by zyasuo           ###   ########.fr       */
+/*   Updated: 2022/08/12 23:46:55 by zyasuo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/game_bonus.h"
 
-void	draw_ray(t_game *game, float angle, t_data *img)
+void	draw_ray(t_game *game, t_vector *unit, t_data *img)
 {
 	float	k_x;
 	float	k_y;
 	float	x;
 	float	y;
-	char	*dst;
 
-	angle += game->player->view->angle;
-	x = (HEIGHT / 5) / game->map->height * game->player->pos->x;
-	y = (HEIGHT / 5) / game->map->height * game->player->pos->y;
-	k_x = -sin(angle * PI / 180);
-	k_y = -cos(angle * PI / 180);
-	dst = img->addr + ((int)y * img->line_length
-			+ (int)x * (img->bits_per_pixel / 8));
-	while (*(unsigned int *)dst != RED + (unsigned int)create_trgb(150, 0, 0, 0)
-		&& *(unsigned int *)dst != (unsigned int)create_trgb(150, 0, 0, 0))
+	x =  game->player->pos->x;
+	y =  game->player->pos->y;
+	k_x = -unit->x;
+	k_y = -unit->y;
+	while (!is_wall(x, y, game->map->map_matrix))
 	{
-		my_mlx_pixel_put(img, x, y, WHITE);
+		my_mlx_pixel_put(img,(HEIGHT / 5) / game->map->height * x,(HEIGHT / 5) / game->map->height * y, WHITE);
 		x += k_x;
 		y += k_y;
-		dst = img->addr + ((int)y * img->line_length
-				+ (int)x * (img->bits_per_pixel / 8));
 	}
 }
 
 void	render_rays(t_game *game, t_data *img)
 {
 	float	i;
+	t_vector	*ray;
 
+	ray = copy_vector(game->player->view->dir);
 	i = -game->player->view->fov / 2;
+	rotate_vector(ray, i);
 	while (i <= game->player->view->fov / 2)
 	{
-		draw_ray(game, i, img);
+		draw_ray(game, ray, img);
+		rotate_vector(ray, 1);
 		i += 1;
 	}
+	free(ray);
 }
 
 static void	another_cycle(int *i_j, int tile, t_game *game, t_data img)

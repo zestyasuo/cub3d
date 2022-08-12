@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   three_dimensional.c                                :+:      :+:    :+:   */
+/*   three_dimensional_bonus.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zyasuo <zyasuo@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/29 17:36:57 by mnathali          #+#    #+#             */
-/*   Updated: 2022/08/12 17:27:40 by zyasuo           ###   ########.fr       */
+/*   Updated: 2022/08/12 17:29:26 by zyasuo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/game.h"
+#include "../include/game_bonus.h"
 
 static float	lenght_of_ray(t_game *game, float angle, float *x, float *y)
 {

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nikita <nikita@student.42.fr>              +#+  +:+       +#+        */
+/*   By: zyasuo <zyasuo@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/20 23:44:01 by zyasuo            #+#    #+#             */
-/*   Updated: 2022/07/15 16:29:32 by nikita           ###   ########.fr       */
+/*   Updated: 2022/08/12 18:37:46 by zyasuo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@
 # include <unistd.h>
 # include "../ft_printf/include/ft_printf.h"
 # include "./get_next_line.h"
-# define WIGHT 800
-# define HEIGHT 600
+# define WIGHT 1800
+# define HEIGHT 900
 # define PI 3.1415
 
 typedef struct s_window {

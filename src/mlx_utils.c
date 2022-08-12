@@ -6,7 +6,7 @@
 /*   By: zyasuo <zyasuo@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/28 01:42:30 by zyasuo            #+#    #+#             */
-/*   Updated: 2022/07/18 13:29:43 by zyasuo           ###   ########.fr       */
+/*   Updated: 2022/08/12 23:07:31 by zyasuo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,10 +46,10 @@ void	draw_square(int color, t_data img, int *coord, int tile)
 	int	j;
 
 	i = 0;
-	while (i < tile)
+	while (i < tile - 1)
 	{
 		j = 0;
-		while (j < tile)
+		while (j < tile - 1)
 		{
 			my_mlx_pixel_put(&img, coord[1] * tile + j, coord[0] * tile + i,
 				color);

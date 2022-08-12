@@ -1,6 +1,6 @@
 NAME	=	cub3d
 B_NAME	=	cub3d_bonus
-CC		=	cc
+CC		=	clang
 CFLAGS	=	-Wall -Wextra -Werror #-fsanitize=address
 
 SRC		=	main.c					\
@@ -32,7 +32,7 @@ B_SRC	= 	main_bonus.c				\
 			string_utils.c				\
 			format_file.c				\
 			get_textures.c				\
-			clear_game.c				\
+			clear_game_bonus.c			\
 			valid_textures.c			\
 			get_map_matrix.c			\
 			valid_map.c					\
@@ -41,9 +41,11 @@ B_SRC	= 	main_bonus.c				\
 			render_player_bonus.c		\
 			mlx_utils.c					\
 			player_controller_bonus.c	\
-			new_player.c				\
-			three_dimensional.c			\
-			end_and_free.c			
+			new_player_bonus.c			\
+			three_dimensional_bonus.c			\
+			end_and_free.c				\
+			vector.c					\
+			collisions.c				\
 
 OBJDIR	=	obj
 SRCDIR	=	src
@@ -54,11 +56,16 @@ HEADERS	=	cub3d.h			\
 			map.h			\
 			get_next_line.h	\
 
+B_HEADERS	=	cub3d.h\
+				game_bonus.h\
+				map.h\
+				get_next_line.h\
+
 FT_PRINTF 	=	ft_printf/libftprintf.a 
 FT_PRINTF_PATH	=	./ft_printf/include
 
 HEAD_DEP	=	${HEADERS:%.h=${INCDIR}/%.h}
-MLXLIB	=	/usr/local/lib/libmlx.a
+MLXLIB	=	mlx/libmlx.a
 
 OBJS	=	${SRC:%.c=${OBJDIR}/%.o}
 
@@ -80,11 +87,11 @@ ${OBJDIR} :
 ${OBJDIR}/%.o: ${SRCDIR}/%.c ${HEAD_DEP} | ${OBJDIR}
 	$(CC) ${CFLAGS} -I/usr/include -I ${INCDIR} -I ${FT_PRINTF_PATH} -Imlx -O3 -c $< -o $@
 
-$(NAME): $(OBJS)
-	$(CC) ${CFLAGS} $^ ${FT_PRINTF} ${MLXLIB} -framework OpenGL -framework AppKit -o $(NAME)
+$(NAME): $(OBJS) ${MLXLIB}
+	$(CC) ${CFLAGS} $^ ${FT_PRINTF} -I includes -Lmlx -lmlx -L/usr/lib -Imlx -lXext -lX11 -lm -lz -o $@
 
-bonus:
-	@make SRC="$(B_SRC)" NAME="$(B_NAME)" all
+bonus: ${HEAD_DEP}
+	${MAKE} SRC="$(B_SRC)" NAME="$(B_NAME)" HEAD_DEP="${B_HEADERS:%.h=${INCDIR}/%.h}" all
 
 clean: 
 	rm -f ${OBJS} ${B_SRC:%.c=${OBJDIR}/%.o}
@@ -93,3 +100,5 @@ fclean: clean
 	rm -f ${NAME} ${B_NAME}
 
 re: fclean all
+
+bre: fclean bonus

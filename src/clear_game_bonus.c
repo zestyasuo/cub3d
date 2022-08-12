@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   clear_game.c                                       :+:      :+:    :+:   */
+/*   clear_game_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zyasuo <zyasuo@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/26 18:31:30 by zyasuo            #+#    #+#             */
-/*   Updated: 2022/08/12 00:09:41 by zyasuo           ###   ########.fr       */
+/*   Created: 2022/08/12 00:09:57 by zyasuo            #+#    #+#             */
+/*   Updated: 2022/08/12 00:42:43 by zyasuo           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/game.h"
+#include "../include/game_bonus.h"
 
 void	clear_texture(void *pointer)
 {
@@ -44,6 +44,7 @@ void	*clear_player(t_player *player)
 	if (!player)
 		return (NULL);
 	free(player->pos);
+	free(player->view->dir);
 	free(player->view);
 	free(player);
 	return (NULL);
@@ -62,3 +63,4 @@ void	clear_game(t_game *game)
 	clear_player(game->player);
 	free(game);
 }
+
